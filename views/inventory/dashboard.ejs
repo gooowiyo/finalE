@@ -1,0 +1,102 @@
+<%- include('../template/header') %>
+
+<h2>Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Productos</h5>
+                <h2 class="card-text"><%= products.length %></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Productos en Stock Bajo</h5>
+                <h2 class="card-text text-danger"><%= lowStock.length %></h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Movimientos Recientes</h5>
+                <h2 class="card-text"><%= recentMovements.length %></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Productos con Stock Bajo
+            </div>
+            <div class="card-body">
+                <% if (lowStock.length === 0) { %>
+                    <p class="text-muted">No hay productos con stock bajo</p>
+                <% } else { %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Stock Actual</th>
+                                    <th>Stock Mínimo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% lowStock.forEach(product => { %>
+                                    <tr>
+                                        <td><%= product.name %></td>
+                                        <td><%= product.stock %></td>
+                                        <td><%= product.minStock %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Últimos Movimientos
+            </div>
+            <div class="card-body">
+                <% if (recentMovements.length === 0) { %>
+                    <p class="text-muted">No hay movimientos recientes</p>
+                <% } else { %>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% recentMovements.forEach(movement => { %>
+                                    <tr>
+                                        <td><%= new Date(movement.date.toDate()).toLocaleDateString() %></td>
+                                        <td><%= movement.type %></td>
+                                        <td><%= movement.quantity %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../template/footer') %>

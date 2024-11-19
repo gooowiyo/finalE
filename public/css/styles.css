@@ -1,0 +1,48 @@
+.navbar {
+    margin-bottom: 2rem;
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.btn-sm {
+    margin-right: 0.5rem;
+}
+
+.alert {
+    margin-top: 1rem;
+}
+
+.dashboard-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.dashboard-card h2 {
+    font-size: 3rem;
+    margin: 1rem 0;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.table-responsive {
+    margin-bottom: 1rem;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}

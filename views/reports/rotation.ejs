@@ -1,0 +1,36 @@
+<%- include('../template/header') %>
+
+<div class="container">
+    <h2>Reporte de Rotación de Productos</h2>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Total Movimientos</th>
+                            <th>Total Entradas</th>
+                            <th>Total Salidas</th>
+                            <th>Stock Actual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(product => { %>
+                            <tr>
+                                <td><%= product.name %></td>
+                                <td><%= product.totalMovements %></td>
+                                <td><%= product.totalEntradas %></td>
+                                <td><%= product.totalSalidas %></td>
+                                <td><%= product.stock %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../template/footer') %>

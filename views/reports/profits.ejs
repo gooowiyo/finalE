@@ -1,0 +1,59 @@
+<%- include('../template/header') %>
+
+<div class="container">
+    <h2>Reporte de Ganancias</h2>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <form class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label class="form-label">Fecha Inicio</label>
+                    <input type="date" name="startDate" class="form-control" value="<%= locals.startDate %>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Fecha Fin</label>
+                    <input type="date" name="endDate" class="form-control" value="<%= locals.endDate %>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary d-block">Filtrar</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Costo Total</th>
+                            <th>Precio Total</th>
+                            <th>Ganancia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% movements.forEach(movement => { %>
+                            <tr>
+                                <td><%= moment(movement.date.toDate()).format('DD/MM/YYYY') %></td>
+                                <td><%= movement.productName %></td>
+                                <td><%= movement.quantity %></td>
+                                <td>$<%= movement.totalCost.toFixed(2) %></td>
+                                <td>$<%= movement.totalPrice.toFixed(2) %></td>
+                                <td>$<%= movement.profit.toFixed(2) %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-info">
+                            <td colspan="5" class="text-end"><strong>Ganancia Total:</strong></td>
+                            <td><strong>$<%= totalProfit.toFixed(2) %></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../template/footer') %>
