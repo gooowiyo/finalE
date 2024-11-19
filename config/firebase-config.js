@@ -1,10 +1,17 @@
+// config/firebase-config.js
 const admin = require('firebase-admin');
-const serviceAccount = require('./psistemas.json'); //
+const serviceAccount = require('./bd.json');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-const db = admin.firestore();
+let db;
+try {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount)
+    });
+  }
+  db = admin.firestore();
+} catch (error) {
+  console.error('Error inicializando Firebase:', error);
+}
 
 module.exports = db;

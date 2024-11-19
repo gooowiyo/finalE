@@ -1,13 +1,11 @@
 const { db } = require('../config/firebase-config');
-const bcrypt = require('bcrypt');
 
 class User {
   static async create(userData) {
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
     const userRef = db.collection('users').doc();
     await userRef.set({
       ...userData,
-      password: hashedPassword,
+      password: userData.password, // La contraseña se guarda sin encriptar
       active: true,
       createdAt: new Date()
     });
@@ -33,9 +31,6 @@ class User {
 
   static async update(id, userData) {
     const userRef = db.collection('users').doc(id);
-    if (userData.password) {
-      userData.password = await bcrypt.hash(userData.password, 10);
-    }
     await userRef.update({
       ...userData,
       updatedAt: new Date()
